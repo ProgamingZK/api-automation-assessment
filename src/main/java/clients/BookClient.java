@@ -14,6 +14,9 @@ public class BookClient {
         return given().spec(SpecFactory.getRequestSpec()).get(BOOKS_PATH);
     }
 
+
+
+
     @Step("Retrieving book details for ID: {id}")
     public Response getBookById(int id) {
         return given()
@@ -25,6 +28,7 @@ public class BookClient {
     @Step("Adding a new book titled: {book.title}")
     public Response createBook(Book book) {
         return given()
+                .log().ifValidationFails()
                 .spec(SpecFactory.getRequestSpec())
                 .body(book)
                 .post(BOOKS_PATH);
