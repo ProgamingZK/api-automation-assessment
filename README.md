@@ -128,9 +128,14 @@ The framework is fully containerized to guarantee **consistent execution across 
 docker build -t bookstore-automation-ata .
 ```
 
-### 2️⃣ Run with Automated Cleanup (macOS / Linux)
+### 2️⃣ Run with Automated Cleanup
+### macOS / Linux
 ```bash
 sudo rm -rf allure-results && docker run --rm   -v "$(pwd)/allure-results:/app/target/allure-results"   bookstore-automation-ata
+```
+### Windows (CMD / Command Prompt)
+```bash
+rd /s /q allure-results & docker run --rm -v "%cd%/allure-results:/app/target/allure-results" bookstore-automation-ata
 ```
 
 ---
