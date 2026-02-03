@@ -8,7 +8,7 @@ permissions:
   contents: write
 
 jobs:
-  test:
+  test-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,13 +21,14 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: Build and Run Docker Tests
+      - name: Run Tests in Docker
         run: |
           docker build -t bookstore-tests .
+          mkdir -p target/allure-results
           docker run --name test-container bookstore-tests
-          docker cp test-container:/app/target/allure-results ./allure-results
+          docker cp test-container:/app/target/allure-results ./target/allure-results
 
-      - name: Get Allure history
+      - name: Get Allure History
         uses: actions/checkout@v4
         if: always()
         continue-on-error: true
@@ -39,11 +40,11 @@ jobs:
         uses: simple-elf/allure-report-action@master
         if: always()
         with:
-          allure_results: allure-results
+          allure_results: target/allure-results
           allure_history: allure-history
           keep_reports: 20
 
-      - name: Deploy Report to GitHub Pages
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         if: always()
         with:
