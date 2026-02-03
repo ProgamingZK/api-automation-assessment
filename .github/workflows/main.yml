@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: writee
+  contents: write
 
 jobs:
   test-and-deploy:
