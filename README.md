@@ -37,6 +37,10 @@ The pipeline will:
 - Execute all **13 automated tests**  
 - Publish the updated report automatically to GitHub Pages  
 
+> [NOTE!]
+> 
+> **Deployment Time:** While the tests execute in seconds, GitHub Pages may take **8-10 minutes** to process the new Allure data and update the live link. Please monitor the `pages-build-deployment` job in the Actions tab to confirm when the latest report is live.
+
 ---
 
 ## 🏗 Project Architecture & Design Patterns
@@ -97,7 +101,7 @@ The framework contains **13 high-impact automated test cases** with a **100% pas
 
 ---
 
-## 🐳 Docker Execution (Optimized for macOS)
+## 🐳 Docker Execution
 
 The framework is **fully containerized** to guarantee consistent execution across environments.
 
@@ -109,13 +113,19 @@ To avoid:
 Use the following **Clean-and-Run strategy**.
 
 ### 1️⃣ Build the Docker Image
-```bash
+```bash ()
 docker build -t bookstore-automation-ata .
 ```
 
 ### 2️⃣ Run with Automated Cleanup
+
+### macOS / Linux
 ```bash
 sudo rm -rf allure-results && docker run --rm   -v "$(pwd)/allure-results:/app/target/allure-results"   bookstore-automation-ata
+```
+### Windows (Command Prompt - CMD)
+```bash
+docker run --rm -v "%cd%/allure-results:/app/target/allure-results" bookstore-automation-ata
 ```
 
 ---
