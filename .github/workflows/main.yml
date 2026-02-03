@@ -28,14 +28,6 @@ jobs:
           docker run --name test-container bookstore-tests
           docker cp test-container:/app/target/allure-results/. ./target/allure-results
 
-      - name: Get Allure History
-        uses: actions/checkout@v4
-        if: always()
-        continue-on-error: true
-        with:
-          ref: gh-pages
-          path: gh-pages
-
       - name: Generate Allure Report
         uses: simple-elf/allure-report-action@master
         if: always()
@@ -51,3 +43,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: allure-history
+          force_orphan: true
