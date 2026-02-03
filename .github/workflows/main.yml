@@ -3,12 +3,12 @@ name: API Automation CI
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
+
+permissions:
+  contents: write
 
 jobs:
   test:
-    name: Run Dockerized API Tests
     runs-on: ubuntu-latest
 
     steps:
@@ -20,26 +20,33 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
-          cache: maven
 
-      - name: Build Docker Image
-        run: docker build -t bookstore-tests .
-
-      - name: Execute Tests in Docker
+      - name: Build and Run Docker Tests
         run: |
-          
+          docker build -t bookstore-tests .
           docker run --name test-container bookstore-tests
-
-      - name: Extract Allure Results
-        if: always()
-        run: |
-          
           docker cp test-container:/app/target/allure-results ./allure-results
 
-      - name: Upload Test Results Artifact
+      - name: Get Allure history
+        uses: actions/checkout@v4
         if: always()
-        uses: actions/upload-artifact@v4
+        continue-on-error: true
         with:
-          name: allure-results-artifact
-          path: allure-results
-          retention-days: 5
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Generate Allure Report
+        uses: simple-elf/allure-report-action@master
+        if: always()
+        with:
+          allure_results: allure-results
+          allure_history: allure-history
+          keep_reports: 20
+
+      - name: Deploy Report to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        if: always()
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-history
