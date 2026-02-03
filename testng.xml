@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Online Bookstore API Automation">
+    <test name="Full API Test Suite">
+        <classes>
+            <class name="tests.BookTests"/>
+            <class name="tests.AuthorTests"/>
+        </classes>
+    </test>
+</suite>
