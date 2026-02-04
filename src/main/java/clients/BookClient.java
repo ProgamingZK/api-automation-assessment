@@ -4,6 +4,7 @@ import io.qameta.allure.Step;
 import models.Book;
 import specs.SpecFactory;
 import io.restassured.response.Response;
+
 import static io.restassured.RestAssured.given;
 
 public class BookClient {
@@ -13,9 +14,6 @@ public class BookClient {
     public Response getAllBooks() {
         return given().spec(SpecFactory.getRequestSpec()).get(BOOKS_PATH);
     }
-
-
-
 
     @Step("Retrieving book details for ID: {id}")
     public Response getBookById(int id) {

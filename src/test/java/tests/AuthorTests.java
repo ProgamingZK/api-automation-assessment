@@ -6,7 +6,6 @@ import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import static org.hamcrest.Matchers.lessThan;
 
 public class AuthorTests {
@@ -61,6 +60,7 @@ public class AuthorTests {
         Response response = authorClient.updateAuthor(authorId, updatedAuthor);
         Assert.assertEquals(response.getStatusCode(), 200, "Update failed");
         Assert.assertEquals(response.jsonPath().getString("firstName"), "Ata - Updated");
+        Assert.assertEquals(response.jsonPath().getString("lastName"), "Senior Engineer");
     }
 
     @Test(priority = 5, description = "Happy Path: Delete author by ID")
