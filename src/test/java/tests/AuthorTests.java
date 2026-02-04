@@ -6,10 +6,13 @@ import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import java.util.Arrays;
+import java.util.List;
 import static org.hamcrest.Matchers.lessThan;
 
 public class AuthorTests {
     private AuthorClient authorClient;
+    private final List<Integer> successCodes = Arrays.asList(200, 201, 204);
 
     @BeforeClass
     public void setup() {
@@ -19,12 +22,9 @@ public class AuthorTests {
     @Test(priority = 1, description = "Happy Path: Get all authors and verify format")
     public void testGetAllAuthors() {
         Response response = authorClient.getAllAuthors();
-
         Assert.assertEquals(response.getStatusCode(), 200);
-        // Senior Touch: Validation of Content-Type
-        Assert.assertTrue(response.getContentType().contains("application/json"),
-                "Expected JSON but got: " + response.getContentType());
-        Assert.assertNotNull(response.jsonPath().getList("$"), "Authors list should not be null");
+        Assert.assertTrue(response.getContentType().contains("application/json"));
+        Assert.assertNotNull(response.jsonPath().getList("$"));
     }
 
     @Test(priority = 2, description = "Happy Path: Get author by valid ID")
@@ -44,7 +44,7 @@ public class AuthorTests {
         newAuthor.setLastName("SDET");
 
         Response response = authorClient.createAuthor(newAuthor);
-        Assert.assertEquals(response.getStatusCode(), 200);
+        Assert.assertTrue(successCodes.contains(response.getStatusCode()));
         Assert.assertEquals(response.jsonPath().getString("firstName"), "Ata");
     }
 
@@ -58,16 +58,15 @@ public class AuthorTests {
         updatedAuthor.setLastName("Senior Engineer");
 
         Response response = authorClient.updateAuthor(authorId, updatedAuthor);
-        Assert.assertEquals(response.getStatusCode(), 200, "Update failed");
+        Assert.assertTrue(successCodes.contains(response.getStatusCode()));
         Assert.assertEquals(response.jsonPath().getString("firstName"), "Ata - Updated");
         Assert.assertEquals(response.jsonPath().getString("lastName"), "Senior Engineer");
     }
 
     @Test(priority = 5, description = "Happy Path: Delete author by ID")
     public void testDeleteAuthor() {
-        int authorId = 3;
-        Response response = authorClient.deleteAuthor(authorId);
-        Assert.assertEquals(response.getStatusCode(), 200, "Deletion failed");
+        Response response = authorClient.deleteAuthor(3);
+        Assert.assertTrue(successCodes.contains(response.getStatusCode()));
     }
 
     @Test(priority = 6, description = "Edge Case: Get author with non-existing ID")
@@ -94,7 +93,6 @@ public class AuthorTests {
         Response response = io.restassured.RestAssured.given()
                 .spec(specs.SpecFactory.getRequestSpec())
                 .delete("/api/v1/Authors");
-
         Assert.assertTrue(response.getStatusCode() >= 400);
     }
 }

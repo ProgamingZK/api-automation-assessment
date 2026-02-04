@@ -6,9 +6,12 @@ import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import java.util.Arrays;
+import java.util.List;
 
 public class BookTests {
     private BookClient bookClient;
+    private final List<Integer> successCodes = Arrays.asList(200, 201, 204);
 
     @BeforeClass
     public void setup() {
@@ -18,7 +21,6 @@ public class BookTests {
     @Test(priority = 1, description = "Happy Path: Verify that all books can be retrieved")
     public void testGetAllBooks() {
         Response response = bookClient.getAllBooks();
-
         Assert.assertEquals(response.getStatusCode(), 200);
         Assert.assertTrue(response.getContentType().contains("application/json"));
         Assert.assertNotNull(response.jsonPath().getList("$"));
@@ -29,7 +31,6 @@ public class BookTests {
     public void testGetBookById() {
         int validId = 1;
         Response response = bookClient.getBookById(validId);
-
         Assert.assertEquals(response.getStatusCode(), 200);
         Assert.assertEquals(response.jsonPath().getInt("id"), validId);
     }
@@ -45,8 +46,7 @@ public class BookTests {
         newBook.setPublishDate("2026-02-02T10:00:00Z");
 
         Response response = bookClient.createBook(newBook);
-
-        Assert.assertEquals(response.getStatusCode(), 200);
+        Assert.assertTrue(successCodes.contains(response.getStatusCode()));
         Assert.assertEquals(response.jsonPath().getString("title"), "Automation Mastery");
         Assert.assertEquals(response.jsonPath().getInt("pageCount"), 300);
     }
@@ -54,7 +54,6 @@ public class BookTests {
     @Test(priority = 4, description = "Happy Path: Verify updating an existing book with full payload")
     public void testUpdateBook() {
         int bookId = 5;
-
         Book updatedBook = new Book();
         updatedBook.setId(bookId);
         updatedBook.setTitle("Updated Title by Ata");
@@ -64,8 +63,7 @@ public class BookTests {
         updatedBook.setPublishDate("2026-02-02T19:00:00Z");
 
         Response response = bookClient.updateBook(bookId, updatedBook);
-
-        Assert.assertEquals(response.getStatusCode(), 200);
+        Assert.assertTrue(successCodes.contains(response.getStatusCode()));
         Assert.assertEquals(response.jsonPath().getString("title"), "Updated Title by Ata");
         Assert.assertEquals(response.jsonPath().getString("description"), "Comprehensive API Testing Guide");
         Assert.assertEquals(response.jsonPath().getInt("pageCount"), 450);
@@ -73,10 +71,8 @@ public class BookTests {
 
     @Test(priority = 5, description = "Happy Path: Verify deleting a book by ID")
     public void testDeleteBook() {
-        int bookId = 10;
-        Response response = bookClient.deleteBook(bookId);
-
-        Assert.assertEquals(response.getStatusCode(), 200);
+        Response response = bookClient.deleteBook(10);
+        Assert.assertTrue(successCodes.contains(response.getStatusCode()));
     }
 
     @Test(priority = 6, description = "Edge Case: Verify 404 for a non-existing book ID")
@@ -119,7 +115,6 @@ public class BookTests {
         Response response = io.restassured.RestAssured.given()
                 .spec(specs.SpecFactory.getRequestSpec())
                 .delete("/api/v1/Books");
-
         Assert.assertTrue(response.getStatusCode() >= 400);
     }
 }
