@@ -18,7 +18,7 @@ The report includes:
 - Full Request / Response logs  
 - Detailed execution timelines  
 
-👉 **View Live Allure Report**
+👉 **View Live Allure Report** https://atafarivar.github.io/api-automation-assessment/
 
 ---
 ### ⚙️ 2. Manual Test Execution (GitHub Actions)
